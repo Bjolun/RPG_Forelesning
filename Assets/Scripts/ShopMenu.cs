@@ -22,10 +22,6 @@ public class ShopMenu : MonoBehaviour
 
     private void Player_OnInteractAction()
     {
-        // Alt dette skjer hver gang Interact action blir trigret.
-        GameManager.Instance.TakeDamage(10);
-
-
         // Hvis spilleren vår er nære shopkeeperen OG menyen ikke er aktiv...
         if(shopkeeper.IsPlayerInRange() && isShopMenuActive == false)
         {
