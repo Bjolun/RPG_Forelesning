@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     // Se om vi flytter oss eller ikke (brukes i animasjoner senere)
     private bool isRunning = false;
 
+    // Deklarerer vi eget event.
+    public event Action OnInteractAction;
+
     // Instanstiere og aktivere input actions
     private void Awake()
     {
@@ -28,6 +32,16 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         input.Disable();
+    }
+
+    private void Start()
+    {
+        input.Player.Interact.performed += Interact_performed; 
+    }
+
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnInteractAction?.Invoke();
     }
 
     private void Update()
